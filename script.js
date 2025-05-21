@@ -542,7 +542,6 @@
           }
           pop();
         }
-
         isOffscreen() {
           return this.x < -this.w;
         }
