@@ -29,6 +29,7 @@ The controls are simple, designed for swift action and daring escapes:
     * Distinctive mushroom obstacles.
     * A beautiful, scrolling background image of the Glimmerwood.
     * Transparent ground layer to seamlessly blend with the background's path.
+    * Local high-score tracking stored in your browser.
 * **Thematic Typography:**
     * "Mystery Quest" font for the main game title and "GAME OVER" message, adding a touch of whimsy.
     * "Glass Antiqua" font for all other in-game text (score, instructions, etc.), providing an elegant and clear interface.
