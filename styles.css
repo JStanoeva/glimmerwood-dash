@@ -1,0 +1,29 @@
+:root {
+  --bg-color: #222;
+  --text-color: #eee;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  font-family: "monospace", sans-serif;
+  color: var(--text-color);
+  text-align: center;
+}
+
+canvas {
+  display: block;
+  border: 2px solid var(--text-color);
+  margin-top: 10px;
+}
+
+#game-info {
+  margin-top: 1rem;
+  font-family: "Glass Antiqua", cursive;
+}
