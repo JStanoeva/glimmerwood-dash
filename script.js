@@ -542,9 +542,16 @@
           }
           pop();
         }
-
         isOffscreen() {
           return this.x < -this.w;
         }
       }
+
+      // Expose p5 lifecycle functions globally for p5.js
+      window.preload = preload;
+      window.setup = setup;
+      window.draw = draw;
+      window.keyPressed = keyPressed;
+      window.mousePressed = mousePressed;
+      window.windowResized = windowResized;
 })();
