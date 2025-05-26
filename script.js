@@ -508,7 +508,9 @@
             titleSong.stop();
           }
           if (gameplaySong && gameplaySong.isLoaded() && !gameplaySong.isPlaying()) {
+
             gameplaySong.loop();
+
           }
         }
       }
