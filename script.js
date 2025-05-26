@@ -24,6 +24,8 @@
       let playerImg;
       let obstacleImg;
       let jumpSound;
+      let hitHurtSound;
+      let pickupHeartSound;
 
       // Fallback colors
       const bgColor = [135, 206, 250];
@@ -68,6 +70,16 @@
           "music/jump.wav",
           () => console.log("Jump sound loaded successfully!"),
           () => console.error("Failed to load jump sound.")
+        );
+        hitHurtSound = loadSound(
+          "music/hitHurt.wav",
+          () => console.log("Hit/Hurt sound loaded successfully!"),
+          () => console.error("Failed to load hit/hurt sound.")
+        );
+        pickupHeartSound = loadSound(
+          "music/pickupHeart.wav",
+          () => console.log("Heart pickup sound loaded successfully!"),
+          () => console.error("Failed to load heart pickup sound.")
         );
       }
 
@@ -265,6 +277,9 @@
           if (player.hits(obstacles[i])) {
             lives--;
             obstacles.splice(i, 1);
+            if (hitHurtSound && hitHurtSound.isLoaded()) {
+              hitHurtSound.play();
+            }
             if (lives <= 0) {
               gameOver();
               return;
@@ -273,6 +288,9 @@
         }
         for (let i = lifeCollectibles.length - 1; i >= 0; i--) {
           if (player.hits(lifeCollectibles[i])) {
+            if (pickupHeartSound && pickupHeartSound.isLoaded()) {
+              pickupHeartSound.play();
+            }
             if (lives < MAX_LIVES) {
               lives++;
             }
