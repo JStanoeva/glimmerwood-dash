@@ -118,6 +118,9 @@
         textAlign(CENTER, CENTER);
         textSize(24); // Default text size
         textFont("monospace");
+        if (titleSong && titleSong.isLoaded() && !titleSong.isPlaying()) {
+          titleSong.loop();
+        }
         checkOrientation();
       }
 
@@ -442,6 +445,9 @@
       function handleInput() {
         userStartAudio();
         if (gameState === "startScreen") {
+          if (titleSong && titleSong.isPlaying()) {
+            titleSong.stop();
+          }
           resetGame();
           gameState = "playing";
         } else if (gameState === "playing") {
