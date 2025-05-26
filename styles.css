@@ -23,6 +23,18 @@ canvas {
   margin-top: 10px;
 }
 
+@media (max-width: 480px), (max-height: 480px) {
+  body {
+    justify-content: flex-start;
+  }
+  canvas {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    margin-top: 0;
+  }
+}
+
 #game-info {
   margin-top: 1rem;
   font-family: "Glass Antiqua", cursive;

@@ -66,8 +66,21 @@
       }
 
       // --- p5.js Setup Function ---
+      function isMobileSize() {
+        return windowWidth <= 480 || windowHeight <= 480;
+      }
+
+      function getCanvasDimensions() {
+        if (isMobileSize()) {
+          return { w: windowWidth, h: windowHeight };
+        }
+        return { w: windowWidth * 0.8, h: windowHeight * 0.7 };
+      }
+
+      // --- p5.js Setup Function ---
       function setup() {
-        let canvas = createCanvas(windowWidth * 0.8, windowHeight * 0.7);
+        const { w, h } = getCanvasDimensions();
+        let canvas = createCanvas(w, h);
         canvas.parent(document.getElementById("game-root"));
         groundLevel = height * 0.85 + groundAdjustment;
         textAlign(CENTER, CENTER);
@@ -398,7 +411,8 @@
 
       // --- p5.js Window Resize Function ---
       function windowResized() {
-        resizeCanvas(windowWidth * 0.8, windowHeight * 0.7);
+        const { w, h } = getCanvasDimensions();
+        resizeCanvas(w, h);
         groundLevel = height * 0.85 + groundAdjustment;
         if (player) {
           player.baseY = groundLevel - player.h;
@@ -421,7 +435,7 @@
         if (!orientationOverlay) {
           orientationOverlay = document.getElementById("orientation-overlay");
         }
-        const isSmall = window.innerWidth <= 480;
+        const isSmall = window.innerWidth <= 480 || window.innerHeight <= 480;
         const isPortrait = window.innerHeight > window.innerWidth;
         if (orientationOverlay) {
           if (isSmall && isPortrait) {
