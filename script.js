@@ -32,7 +32,7 @@
       // --- p5.js Preload Function ---
       function preload() {
         bgImg = loadImage(
-          "backdrop.png",
+          "images/backdrop.png",
           () => console.log("Background image loaded successfully!"),
           () =>
             console.error(
@@ -40,7 +40,7 @@
             )
         );
         lifeIconImg = loadImage(
-          "heart.png",
+          "images/heart.png",
           () => console.log("Life icon image loaded successfully!"),
           () =>
             console.error(
@@ -48,7 +48,7 @@
             )
         );
         playerImg = loadImage(
-          "player.png",
+          "images/player.png",
           () => console.log("Player image loaded successfully!"),
           () =>
             console.error(
@@ -56,7 +56,7 @@
             )
         );
         obstacleImg = loadImage(
-          "mushroom.png",
+          "images/mushroom.png",
           () => console.log("Obstacle image loaded successfully!"),
           () =>
             console.error(
