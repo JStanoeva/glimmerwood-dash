@@ -15,6 +15,7 @@
       let gameState = "startScreen";
       let groundLevel;
       const groundAdjustment = 5; // Pixels to lower the logical ground level
+      let orientationOverlay;
 
       // --- Image Variables ---
       let bgImg;
@@ -72,6 +73,7 @@
         textAlign(CENTER, CENTER);
         textSize(24); // Default text size
         textFont("monospace");
+        checkOrientation();
       }
 
       // --- p5.js Draw Function ---
@@ -412,6 +414,24 @@
           displayPauseScreen();
         }
         if (gameState === "gameOver") displayGameOver();
+        checkOrientation();
+      }
+
+      function checkOrientation() {
+        if (!orientationOverlay) {
+          orientationOverlay = document.getElementById("orientation-overlay");
+        }
+        const isSmall = window.innerWidth <= 480;
+        const isPortrait = window.innerHeight > window.innerWidth;
+        if (orientationOverlay) {
+          if (isSmall && isPortrait) {
+            orientationOverlay.classList.add("show");
+            noLoop();
+          } else {
+            orientationOverlay.classList.remove("show");
+            loop();
+          }
+        }
       }
 
       // ==================================================
@@ -554,4 +574,6 @@
       window.keyPressed = keyPressed;
       window.mousePressed = mousePressed;
       window.windowResized = windowResized;
+      window.addEventListener("orientationchange", checkOrientation);
+      window.addEventListener("resize", checkOrientation);
 })();
