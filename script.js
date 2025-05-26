@@ -26,6 +26,8 @@
       let jumpSound;
       let hitHurtSound;
       let pickupHeartSound;
+      let titleSong;
+      let gameplaySong;
 
       // Fallback colors
       const bgColor = [135, 206, 250];
@@ -81,6 +83,16 @@
           () => console.log("Heart pickup sound loaded successfully!"),
           () => console.error("Failed to load heart pickup sound.")
         );
+        titleSong = loadSound(
+          "music/titleSong.mp3",
+          () => console.log("Title song loaded successfully!"),
+          () => console.error("Failed to load title song.")
+        );
+        gameplaySong = loadSound(
+          "music/gameplaySong.mp3",
+          () => console.log("Gameplay song loaded successfully!"),
+          () => console.error("Failed to load gameplay song.")
+        );
       }
 
       // --- p5.js Setup Function ---
@@ -110,6 +122,7 @@
 
       // --- p5.js Draw Function ---
       function draw() {
+        manageMusic();
         if (gameState === "startScreen") {
           displayStartScreen();
         } else if (gameState === "playing") {
@@ -469,6 +482,30 @@
           } else {
             orientationOverlay.classList.remove("show");
             loop();
+          }
+        }
+      }
+
+      function manageMusic() {
+        if (gameState === "startScreen") {
+          if (titleSong && titleSong.isLoaded() && !titleSong.isPlaying()) {
+            titleSong.setLoop(true);
+            titleSong.play();
+          }
+          if (gameplaySong && gameplaySong.isPlaying()) {
+            gameplaySong.stop();
+          }
+        } else if (
+          gameState === "playing" ||
+          gameState === "paused" ||
+          gameState === "gameOver"
+        ) {
+          if (titleSong && titleSong.isPlaying()) {
+            titleSong.stop();
+          }
+          if (gameplaySong && gameplaySong.isLoaded() && !gameplaySong.isPlaying()) {
+            gameplaySong.setLoop(true);
+            gameplaySong.play();
           }
         }
       }
