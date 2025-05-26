@@ -72,6 +72,7 @@
 
       function getCanvasDimensions() {
         if (isMobileSize()) {
+
           return { w: windowWidth, h: windowHeight };
         }
         return { w: windowWidth * 0.8, h: windowHeight * 0.7 };
