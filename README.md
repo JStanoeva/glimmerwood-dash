@@ -65,3 +65,7 @@ The Glimmerwood holds many more secrets! Potential future enhancements could inc
 ---
 
 Developed with magic and pixels by **Queen Tora of the Cheese Republic**! 👑🧀
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
