@@ -26,6 +26,8 @@
       let jumpSound;
       let hitHurtSound;
       let pickupHeartSound;
+      let titleSong;
+      let gameplaySong;
 
       // Fallback colors
       const bgColor = [135, 206, 250];
@@ -81,6 +83,16 @@
           () => console.log("Heart pickup sound loaded successfully!"),
           () => console.error("Failed to load heart pickup sound.")
         );
+        titleSong = loadSound(
+          "music/titleSong.mp3",
+          () => console.log("Title song loaded successfully!"),
+          () => console.error("Failed to load title song.")
+        );
+        gameplaySong = loadSound(
+          "music/gameplaySong.mp3",
+          () => console.log("Gameplay song loaded successfully!"),
+          () => console.error("Failed to load gameplay song.")
+        );
       }
 
       // --- p5.js Setup Function ---
@@ -98,6 +110,7 @@
 
       // --- p5.js Setup Function ---
       function setup() {
+        userStartAudio();
         const { w, h } = getCanvasDimensions();
         let canvas = createCanvas(w, h);
         canvas.parent(document.getElementById("game-root"));
@@ -110,6 +123,7 @@
 
       // --- p5.js Draw Function ---
       function draw() {
+        manageMusic();
         if (gameState === "startScreen") {
           displayStartScreen();
         } else if (gameState === "playing") {
@@ -401,6 +415,9 @@
         player = new Player();
         gameSpeed = 5;
         bgImgX = 0;
+        if (gameplaySong && gameplaySong.isPlaying()) {
+          gameplaySong.stop();
+        }
       }
 
       // --- p5.js Input Functions ---
@@ -423,6 +440,7 @@
 
       // --- Central Input Handler (for Space/Click) ---
       function handleInput() {
+        userStartAudio();
         if (gameState === "startScreen") {
           resetGame();
           gameState = "playing";
@@ -469,6 +487,28 @@
           } else {
             orientationOverlay.classList.remove("show");
             loop();
+          }
+        }
+      }
+
+      function manageMusic() {
+        if (gameState === "startScreen") {
+          if (titleSong && titleSong.isLoaded() && !titleSong.isPlaying()) {
+            titleSong.loop();
+          }
+          if (gameplaySong && gameplaySong.isPlaying()) {
+            gameplaySong.stop();
+          }
+        } else if (
+          gameState === "playing" ||
+          gameState === "paused" ||
+          gameState === "gameOver"
+        ) {
+          if (titleSong && titleSong.isPlaying()) {
+            titleSong.stop();
+          }
+          if (gameplaySong && gameplaySong.isLoaded() && !gameplaySong.isPlaying()) {
+            gameplaySong.loop();
           }
         }
       }
