@@ -84,12 +84,12 @@
           () => console.error("Failed to load heart pickup sound.")
         );
         titleSong = loadSound(
-          "music/titleSong.mp3",
+          "music/titleSong.wav",
           () => console.log("Title song loaded successfully!"),
           () => console.error("Failed to load title song.")
         );
         gameplaySong = loadSound(
-          "music/gameplaySong.mp3",
+          "music/gameplaySong.wav",
           () => console.log("Gameplay song loaded successfully!"),
           () => console.error("Failed to load gameplay song.")
         );
