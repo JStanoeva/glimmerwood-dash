@@ -110,6 +110,7 @@
 
       // --- p5.js Setup Function ---
       function setup() {
+        userStartAudio();
         const { w, h } = getCanvasDimensions();
         let canvas = createCanvas(w, h);
         canvas.parent(document.getElementById("game-root"));
@@ -414,6 +415,9 @@
         player = new Player();
         gameSpeed = 5;
         bgImgX = 0;
+        if (gameplaySong && gameplaySong.isPlaying()) {
+          gameplaySong.stop();
+        }
       }
 
       // --- p5.js Input Functions ---
@@ -436,6 +440,7 @@
 
       // --- Central Input Handler (for Space/Click) ---
       function handleInput() {
+        userStartAudio();
         if (gameState === "startScreen") {
           resetGame();
           gameState = "playing";
@@ -489,8 +494,7 @@
       function manageMusic() {
         if (gameState === "startScreen") {
           if (titleSong && titleSong.isLoaded() && !titleSong.isPlaying()) {
-            titleSong.setLoop(true);
-            titleSong.play();
+            titleSong.loop();
           }
           if (gameplaySong && gameplaySong.isPlaying()) {
             gameplaySong.stop();
@@ -504,8 +508,9 @@
             titleSong.stop();
           }
           if (gameplaySong && gameplaySong.isLoaded() && !gameplaySong.isPlaying()) {
-            gameplaySong.setLoop(true);
-            gameplaySong.play();
+
+            gameplaySong.loop();
+
           }
         }
       }
