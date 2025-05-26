@@ -51,6 +51,7 @@ The controls are simple, designed for swift action and daring escapes:
         * Python 3: `python -m http.server`
         * Python 2: `python -m SimpleHTTPServer`
         Then, navigate to `http://localhost:8000` (or the port specified) in your browser.
+4. **Play Live:** [Glimmerwood Dash](https://jstanoeva.github.io/glimmerwood-dash/)
 
 ## 🌟 Future Ideas (The Adventure Continues!)
 
