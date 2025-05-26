@@ -673,4 +673,21 @@
       window.windowResized = windowResized;
       window.addEventListener("orientationchange", checkOrientation);
       window.addEventListener("resize", checkOrientation);
+
+      // Attempt to automatically play the title music once the page loads
+      window.addEventListener("load", () => {
+        if (gameState === "startScreen") {
+          try {
+            const ctx = getAudioContext();
+            if (ctx.state !== "running") {
+              ctx.resume();
+            }
+          } catch (e) {
+            // getAudioContext may not be available yet; ignore errors
+          }
+          if (titleSong && titleSong.isLoaded() && !titleSong.isPlaying()) {
+            titleSong.loop();
+          }
+        }
+      });
 })();
