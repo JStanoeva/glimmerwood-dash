@@ -34,6 +34,9 @@
       let highScore = Number(localStorage.getItem("highScore")) || 0;
       const groundColor = [139, 69, 19];
 
+      // Baseline frame time in ms for 60fps
+      const BASE_FRAME_TIME = 16.67;
+
       // --- p5.js Preload Function ---
       function preload() {
         bgImg = loadImage(
@@ -223,7 +226,8 @@
           image(bgImg, bgImgX + width, 0, width, height);
 
           if (gameState === "playing") {
-            bgImgX -= gameSpeed * 0.2;
+            const dt = deltaTime / BASE_FRAME_TIME;
+            bgImgX -= gameSpeed * 0.2 * dt;
             if (bgImgX <= -width) {
               bgImgX = 0;
             }
@@ -566,8 +570,9 @@
         update() {
           if (gameState !== "playing") return;
 
-          this.vy += gravity;
-          this.y += this.vy;
+          const dt = deltaTime / BASE_FRAME_TIME;
+          this.vy += gravity * dt;
+          this.y += this.vy * dt;
           this.y = constrain(this.y, 0, this.baseY);
           if (this.y >= this.baseY) {
             this.vy = 0;
@@ -601,7 +606,8 @@
 
         move() {
           if (gameState === "playing") {
-            this.x -= gameSpeed;
+            const dt = deltaTime / BASE_FRAME_TIME;
+            this.x -= gameSpeed * dt;
           }
         }
 
@@ -636,7 +642,8 @@
 
         move() {
           if (gameState === "playing") {
-            this.x -= gameSpeed * 0.9;
+            const dt = deltaTime / BASE_FRAME_TIME;
+            this.x -= gameSpeed * 0.9 * dt;
           }
         }
 
