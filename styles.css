@@ -23,7 +23,8 @@ canvas {
   margin-top: 10px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px), (max-height: 480px) {
+
   body {
     justify-content: flex-start;
   }

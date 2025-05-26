@@ -66,8 +66,13 @@
       }
 
       // --- p5.js Setup Function ---
+      function isMobileSize() {
+        return windowWidth <= 480 || windowHeight <= 480;
+      }
+
       function getCanvasDimensions() {
-        if (windowWidth <= 480) {
+        if (isMobileSize()) {
+
           return { w: windowWidth, h: windowHeight };
         }
         return { w: windowWidth * 0.8, h: windowHeight * 0.7 };
@@ -431,7 +436,7 @@
         if (!orientationOverlay) {
           orientationOverlay = document.getElementById("orientation-overlay");
         }
-        const isSmall = window.innerWidth <= 480;
+        const isSmall = window.innerWidth <= 480 || window.innerHeight <= 480;
         const isPortrait = window.innerHeight > window.innerWidth;
         if (orientationOverlay) {
           if (isSmall && isPortrait) {
