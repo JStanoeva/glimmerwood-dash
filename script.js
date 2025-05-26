@@ -23,6 +23,7 @@
       let lifeIconImg;
       let playerImg;
       let obstacleImg;
+      let jumpSound;
 
       // Fallback colors
       const bgColor = [135, 206, 250];
@@ -62,6 +63,11 @@
             console.error(
               "Failed to load obstacle image. Using fallback brown rectangle."
             )
+        );
+        jumpSound = loadSound(
+          "music/jump.wav",
+          () => console.log("Jump sound loaded successfully!"),
+          () => console.error("Failed to load jump sound.")
         );
       }
 
@@ -463,11 +469,14 @@
           this.fallbackColor = color(34, 139, 34);
         }
 
-        jump() {
-          if (this.y >= this.baseY - 1 && gameState === "playing") {
-            this.vy = jumpForce;
-          }
-        }
+       jump() {
+         if (this.y >= this.baseY - 1 && gameState === "playing") {
+           this.vy = jumpForce;
+            if (jumpSound && jumpSound.isLoaded()) {
+              jumpSound.play();
+            }
+         }
+       }
 
         hits(otherThing) {
           let playerLeft = this.x + 5;
