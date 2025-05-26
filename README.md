@@ -56,7 +56,7 @@ The controls are simple, designed for swift action and daring escapes:
 
 The Glimmerwood holds many more secrets! Potential future enhancements could include:
 
-* Magical sound effects and an enchanting background music score.
+* Magical sound effects and an enchanting background music score. ✅
 * Different types of mushroom obstacles with unique behaviors.
 * Special power-ups (e.g., temporary invincibility, score multipliers).
 * A high-score leaderboard to challenge fellow Glimmerwood Dashers.
