@@ -127,8 +127,9 @@ async function requestFullscreenAndLandscape(element: HTMLElement) {
     }
   } catch {}
   try {
-    if (screen.orientation && screen.orientation.lock) {
-      await screen.orientation.lock("landscape");
+    const so = (screen as any).orientation;
+    if (so && typeof so.lock === "function") {
+      await so.lock("landscape");
     }
   } catch {}
 }
