@@ -154,4 +154,6 @@ Developed with magic, pixels, and cheese by **Queen Tora of the Cheese Republic*
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+- **Code:** Licensed under the [MIT License](LICENSE).
+- **Assets (images & audio):** All rights reserved.  
+  You may not use, copy, or redistribute the artwork or audio without permission.
