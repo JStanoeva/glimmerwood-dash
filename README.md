@@ -100,7 +100,9 @@ pnpm preview
 
 > The game expects assets under /public/images and /public/music with exactly the filenames listed above.
 
-## 🌐 Deploy
+---
+
+# 🌐 Deploy
 
 **Vercel (recommended)**
 
