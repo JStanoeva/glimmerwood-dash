@@ -1,4 +1,4 @@
-# ✨ Glimmerwood Dash (React + TypeScript + Canvas) ✨
+# ✨ Glimmerwood Dash ✨
 
 Embark on a mystical run through an enchanted, glowing forest in **Glimmerwood Dash**! Guide a valiant purple-haired heroine as you leap over treacherous mushrooms and collect heart-shaped lives. How far can your reflexes carry you into the heart of the Glimmerwood?
 
