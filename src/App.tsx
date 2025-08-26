@@ -1,15 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-/**
- * Glimmerwood Dash — React (TS) + Tailwind + Canvas API
- * - Desktop canvas centered; mobile/tablet fullscreen
- * - Backdrop repeats on Title/Game Over (static) and scrolls during Play
- * - Fireflies twinkle on all screens; only move during Play
- * - Title music restarts on Game Over
- * - Custom title logo image
- * - Robust image preloading (Promise.all) before starting the loop
- */
-
 type GameState = "TITLE" | "PLAYING" | "PAUSED" | "GAMEOVER";
 type ObstacleType = "SMALL" | "LARGE";
 
