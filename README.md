@@ -159,3 +159,7 @@ Developed with magic, pixels, and cheese by **Queen Tora of the Cheese Republic*
 - **Code:** Licensed under the [MIT License](LICENSE).
 - **Assets (images & audio):** All rights reserved.  
   You may not use, copy, or redistribute the artwork or audio without permission.
+
+---
+
+![CheeseGPT Approved](https://img.shields.io/badge/CheeseGPT-Approved-ffd53d?style=for-the-badge&logo=databricks&logoColor=white&labelColor=0000a3)
