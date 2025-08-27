@@ -115,13 +115,17 @@ async function requestFullscreenAndLandscape(element: HTMLElement) {
         await el.webkitRequestFullscreen?.();
       }
     }
-  } catch {}
+  } catch {
+    /* empty */
+  }
   try {
     const so = (screen as any).orientation;
     if (so && typeof so.lock === "function") {
       await so.lock("landscape");
     }
-  } catch {}
+  } catch {
+    /* empty */
+  }
 }
 
 export default function App() {
@@ -546,7 +550,9 @@ export default function App() {
     try {
       el.currentTime = 0;
       el.play();
-    } catch {}
+    } catch {
+      /* empty */
+    }
   }
   function doJump() {
     const g = gameRef.current!;
