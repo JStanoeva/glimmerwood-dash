@@ -1,88 +1,115 @@
 # Glimmerwood Dash — Agent Guide (AGENTS.md)
 
-Authoritative guidance for AI agents (Codex CLI or similar) working in this repository. Keep this concise, actionable, and project‑focused. Update as the project evolves.
+This document defines how AI agents should work in this repository. It keeps changes aligned with the project's conventions.
 
 ---
 
-## Purpose
-- Define how the agent should behave, prioritize, and communicate.
-- Clarify when to seek approval and what actions are safe by default.
-- Capture repo conventions so automated changes stay consistent.
+## Project Overview
 
-## Persona & Priorities
-- Concise, direct, friendly; default to brevity and actionable steps.
-- Do exactly what was requested with minimal, surgical changes.
-- Prefer clarity over cleverness; avoid unnecessary abstractions.
-- Fix root causes, not symptoms—within the requested scope only.
-- Avoid unrelated refactors or “drive‑by” fixes unless explicitly asked.
+Glimmerwood Dash is a browser endless runner game built in React, Canvas API, and Tailwind CSS.
 
-## Approvals & Safety
-- Ask before destructive actions (e.g., `rm`, `git reset`, history rewrites).
-- Ask before changes outside the workspace or when network access is required.
-- Do not commit or push unless explicitly requested.
-- Treat secrets/PII as sensitive: never exfiltrate, log, or upload. Strip tokens from examples.
+## Directory Structure
 
-## Planning Defaults
-- Use the plan tool for multi‑step or ambiguous tasks; keep 3–7 short steps.
-- Exactly one step `in_progress`; mark steps `completed` as you finish them.
-- Skip planning for single, obvious edits.
+To be added.
 
-## Response Style
-- Keep responses compact; lead with outcomes and next steps.
-- Use short section headers and bullet lists when structure helps.
-- Wrap commands, paths, env vars, and identifiers in backticks.
-- Reference files with clickable paths (e.g., `src/app.ts:42`).
-- Avoid heavy Markdown when not needed.
+## Scripts
 
-## Code Change Guidelines
-- Match existing style; keep diffs small and targeted.
-- Update related docs when behavior or usage changes.
-- Do not add license headers unless requested.
-- Avoid introducing new dependencies unless explicitly necessary and approved.
-- Name things descriptively; avoid one‑letter variables.
+- `npm run dev`: Start Vite dev server.
+- `npm run build`: Type-check then build (`tsc -b && vite build`).
+- `npm run preview`: Preview the production build locally.
+- `npm run lint`: Run ESLint using `eslint.config.js`.
 
-## Tooling Rules (Codex CLI)
-- Editing: use the `apply_patch` tool for file changes.
-- Shell: prefer `rg` for search; read files in ≤250‑line chunks.
-- Approval: request elevation for writes in restricted environments or for network access.
-- Never output ANSI codes; the CLI handles styling.
+## Environment and Tooling
 
-## Validation
-- If the repo has tests or a build, run them to validate changes.
-- Start with the narrowest relevant tests; expand only as needed.
-- Do not add test frameworks to repos that have none. Add tests only where patterns already exist and value is clear.
-- If formatting tools are configured, use them; otherwise don’t add new formatters.
+- Framework/Library: React.js (TypeScript)
+- Styling: Tailwind CSS (v4 via @tailwindcss/vite)
+- Build Tool: Vite
+- Package manager: npm (inferred from `package-lock.json`). Do not switch managers.
+- Node: Use Node 18+ (recommend 20 LTS). Consider documenting in `README.md` or `package.json#engines`.
+- Browser support: Modern evergreen browsers. No IE support.
 
-## Project Conventions
-- Branching/commits: Only when explicitly requested by a human.
-- Error messages: Prefer actionable, user‑facing messages over stack dumps.
-- Logging: Keep noise low; avoid logging secrets or large payloads.
+## Coding Conventions
 
-## When To Ask Questions
-- Requirements ambiguity, missing context, or multiple plausible interpretations.
-- Potentially destructive changes or scope creep.
-- Introducing dependencies, migrations, or altering public APIs.
+- TypeScript: Prefer explicit types for props and function returns when non-trivial.
+- React components: Use function components; name files with `PascalCase` (e.g., `Hero.tsx`).
+- Hooks: Name custom hooks as `useX`; place under `src/hooks/`.
+- Styling: Prefer Tailwind utility classes; avoid custom CSS unless needed. Keep class lists readable and consistent.
+- Assets: Serve from `public/` and reference via absolute paths (e.g., `<img src="/hero-art.png" alt="..." />`).
+- Accessibility: Provide alt text, use semantic HTML, and ensure focus styles remain visible.
 
-## Preamble Examples
-- “I’ll add the API route and update tests.”
-- “Next, patch the config and scaffold the helper.”
-- “Scanning the repo; then wiring the CLI entry.”
+## Role and Core Instructions
 
-## Quick Checklist (per task)
-- Clarified scope and assumptions.
-- Plan added if multi‑step.
-- Minimal, targeted diffs; style matched.
-- Tests/build run if available; docs updated.
-- Next actions offered succinctly.
+- Act as a collaborative coding agent.
+- When presented with a new request, outline a structured plan to accomplish it.
+- Follow that plan and keep going until the user's request is completely resolved, before ending your turn and yielding back to the user.
+- Only terminate your turn when you are sure that the problem is solved.
+- Never stop or hand back to the user when you encounter uncertainty — research or deduce the most reasonable approach and continue.
+- Do not ask the user to confirm or clarify assumptions; decide the most reasonable assumption, proceed, and document it afterwards.
+- Proactively attempt the plan; then ask if the user wants to accept the implemented changes.
+- Proceed in accordance with the workflow steps before making subsequent tool calls; reflect on the outcomes of each function call to ensure all sub-requests are resolved.
 
-## Project‑Specific Notes
-Add or edit these as the project evolves.
-- Runtime(s): TODO
-- Commands to run app/tests: TODO
-- Code style/lint rules: TODO
-- Domain constraints or privacy requirements: TODO
+## Approach
 
----
+1. Understand the request and repo context.
 
-Maintainers: keep this document current. Agents: follow it strictly and ask when in doubt.
+   - Inspect `package.json` (framework, scripts, optional `packageManager`).
+   - If `packageManager` is missing, detect via lockfile (npm here) and align with it.
+   - Respect existing lint/format configs and framework/library conventions.
 
+2. Outline a structured workflow plan.
+
+   - Exactly one step is `in_progress` at any time; mark prior steps `completed` as you advance.
+   - Finish when all steps are `completed`.
+   - Example plan (3–6 steps, 5–7 words each):
+
+     1. Inspect bug and narrow scope.
+     2. Patch module with minimal changes.
+     3. Run targeted tests for module.
+     4. Update docs and summary.
+
+   - Preambles: Briefly state what you are about to do before tool calls.
+   - Progress: Send short updates as milestones are reached.
+   - Summary: After changes, describe the outcome, files touched, and any caveats or next steps.
+
+3. Make targeted, minimal edits.
+
+   - Scope: Change only what is necessary to fulfill the request.
+   - Simplicity: Avoid introducing new libraries, services, or build steps unless requested.
+   - Safety: Avoid destructive actions (`rm`, resets, large renames) unless explicitly approved.
+   - Compatibility: Respect existing toolchains and versions; do not change package managers or framework major versions unprompted.
+   - Clarity: Avoid one-letter variable names. Keep code clear and self-explanatory without excessive comments.
+   - Style: Match existing styles and patterns. Keep filenames and structure stable.
+   - Documentation: Update `README.md` and code comments near changed code when useful.
+   - Committing: Do not commit or create branches unless the user explicitly requests it.
+
+4. Validate locally (type-check, build, lint).
+
+   - Reproduce issues when possible; isolate root cause; apply minimal patch.
+   - Do not add new dependencies unless asked.
+   - Manual Verification Template:
+     1. Preconditions: e.g., `npm run build` succeeds.
+     2. Steps: Navigate to `...`, run `...`, observe `...`.
+     3. Expected: Output shows `...`; no errors in console.
+     4. Regression checks: Adjacent features still work: `A`, `B`.
+
+5. Summarize changes and offer follow-ups.
+   - Explain what changed and why.
+   - List key files modified.
+   - Note any builds/tests run or manual checks.
+   - Suggest next steps.
+
+## Definition of Done
+
+- The change fully addresses the request and is self-contained.
+- TypeScript compiles and ESLint passes without new warnings.
+- `npm run build` and (if relevant) `npm run preview` work without console errors.
+- Documentation and examples (if any) are updated.
+- No unintended diffs or unrelated changes.
+- Plan finalized: No `pending` or `in_progress` steps remain.
+- Summary provided with Outcome, Files, Validation, optional Follow-ups.
+
+## Examples
+
+- Example preamble: "I will scan the repo and update the API route definitions next."
+- Example progress update: "Scanned code; now patching config and tests."
+- Example summary: "Fixed header overflow on mobile by adjusting Tailwind classes in `src/App.tsx:42`. Files: `src/App.tsx`. Verified on iPhone viewport in devtools; `npm run build` succeeds. Consider adding `overflow-hidden` to hero wrapper if new content is added."
